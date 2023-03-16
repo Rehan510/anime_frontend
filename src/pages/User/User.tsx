@@ -79,7 +79,8 @@ export default function User() {
                       <br />
                       <PhotoGallery
                         group="user"
-                        image={`${process.env.REACT_APP_FILE_URL}/${user.profile_picture}`}
+                        image={user.profile_picture}
+
                       ></PhotoGallery>
                     </>
                   ) : (

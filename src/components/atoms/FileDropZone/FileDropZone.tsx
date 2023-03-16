@@ -75,7 +75,7 @@ export default function FileDropZone({ type, uploadType }: any) {
       payload.url = xhr.data.url;
       arr.push({ ...payload });
     });
-
+    
     if (uploadType === "gifs") GifService.addGif(arr, dispatch);
     if (uploadType === "music") MusicService.addMusic(arr, dispatch);
     if (uploadType === "videos") VideoService.addVideo(arr, dispatch);
