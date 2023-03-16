@@ -27,9 +27,7 @@ export default function Members() {
                 <PhotoGallery
                   group="user"
                   image={
-                    user?.profile_picture
-                      ? `${process.env.REACT_APP_FILE_URL}/${user?.profile_picture}`
-                      : TigerImg
+                    user?.profile_picture ? user?.profile_picture : TigerImg
                   }
                 ></PhotoGallery>
               </div>
