@@ -1,11 +1,20 @@
-import { Field, reduxForm } from "redux-form";
-
-function ChatBoxForm({ handleSubmit }: any) {
+import { Field, reduxForm, reset } from "redux-form";
+import { useDispatch } from "react-redux";
+function ChatBoxForm(props: any) {
+  const dispatch = useDispatch();
+  const { handleSubmit, pristine, reset, submitting, } = props;
+  const handleSubmitForm = (event:any) => {
+    event.preventDefault();
+    handleSubmit(event)
+    reset();
+    // dispatch(reset("ChatBoxForm"));
+  };
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmitForm}
       className="form"
-      style={{ alignItems: "stretch" }}>
+      style={{ alignItems: "stretch" }}
+    >
       <Field
         type="text"
         name="message"
@@ -32,7 +41,9 @@ function ChatBoxForm({ handleSubmit }: any) {
           padding: "18px 24px",
           background: "none",
           border: "2px solid #ffffff",
-        }}>
+          cursor: "pointer",
+        }}
+      >
         Send
       </button>
     </form>

@@ -47,13 +47,13 @@ export default function SailorMoon() {
   const audioRef = useRef<any>();
   let sailorPlay = useRef<any>(null);
 
-  // useEffect(() => {
-  //   setAnim(anime);
-  // }, [anime]);
+  useEffect(() => {
+    setAnim(anime);
+  }, [anime]);
 
-  // useEffect(() => {
-  //   setImage(outfit);
-  // }, [outfit]);
+  useEffect(() => {
+    setImage(outfit);
+  }, [outfit]);
 
   useEffect(() => {
     if (audioRef.current) {

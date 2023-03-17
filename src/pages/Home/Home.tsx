@@ -1,6 +1,8 @@
+import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
 import Chat from "pages/Chat";
 import { useAppSelector } from "redux/hooks";
+import { useDispatch } from "react-redux";
 import Gifs from "pages/Gifs";
 import Pictures from "pages/Pictures";
 import Music from "pages/Music";
@@ -9,9 +11,41 @@ import User from "pages/User";
 import Members from "pages/Members";
 import SailorMoon from "pages/SailorMoon";
 import ChatBox from "components/molecules/ChatBox";
-
+import SocketService from "../../services/sockets.service";
+import { config } from "../../config/config";
+import { messageActions } from "../../redux/slices/message";
 export default function Home() {
   const { tab } = useAppSelector((state) => state.tab);
+  const dispatch = useDispatch();
+  console.log("me");
+  useEffect(() => {
+    if (SocketService.socket) {
+      SocketService.socket.connect();
+      console.log("========================================");
+      console.log(SocketService.socket);
+      SocketService.socket.emit("join_room", config.PUBLIC_CHAT_ROOM);
+      SocketService.socket.on(config.PUBLIC_CHAT_ROOM, function (data: any) {
+        console.log(data, "datadad");
+        const message = {
+          sender: {
+            name: data.user.name,
+            race: data.user.race,
+            profile_picture: data.user.profile_picture,
+          },
+          message: data.message,
+          createdAt: data.createdAt,
+          type: "message",
+        };
+        dispatch(messageActions.setPublicChatMessages(message));
+      });
+      // SocketService.socket.emit('join_room', user.id);
+      // SocketService.socket.on(user.id, function(data) {
+      //   if (get(data, 'status', false)) {
+      //     dispatch(setIsNewEmailNotification(true));
+      //   }
+      // });
+    }
+  }, [dispatch]);
 
   return (
     <div className="main">

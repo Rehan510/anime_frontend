@@ -6,4 +6,5 @@ export const config = {
   APP_URL: `${process.env.REACT_APP_URL}`,
   FILE_URL: `${process.env.REACT_APP_FILE_URL}`,
   LOCAL_API_URL: process.env.REACT_APP_LOCAL_API_URL,
+  PUBLIC_CHAT_ROOM: process.env.REACT_APP_SOCKET_PUBLIC_CHAT_ROOM,
 };

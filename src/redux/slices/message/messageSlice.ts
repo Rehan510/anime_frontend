@@ -3,12 +3,23 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: MessageState = {
   messages: [],
+  publicChatMessages: [
+    {
+      sender: { name: "firstUser", race: "human" },
+      message: "Hi this is hardcode message",
+      createdAt: new Date(),
+    },
+  ],
 };
 
 export const messageSlice = createSlice({
   name: "message",
   initialState,
   reducers: {
+    setPublicChatMessages: (state, action) => {
+      state.publicChatMessages.push(action.payload);
+    },
+
     addMessage: (state, action) => {
       state.messages.push(action.payload);
     },

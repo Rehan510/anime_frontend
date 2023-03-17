@@ -9,8 +9,10 @@ export default function Chat() {
   const dispatch = useAppDispatch();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { user } = useAppSelector((state) => state.auth);
-  const { messages } = useAppSelector((state) => state.message);
-  console.log("this is messages", messages);
+  const { messages, publicChatMessages } = useAppSelector(
+    (state) => state.message
+  );
+  console.log(publicChatMessages, "public");
   useEffect(() => {
     MessageService.getMessages(dispatch);
     SocketService.message(user?._id, dispatch);
@@ -19,32 +21,31 @@ export default function Chat() {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [publicChatMessages]);
+  console.log(publicChatMessages, "mes");
   return (
     <>
       {/* <h2 className="heading">Chat</h2> */}
       <div style={{ height: "calc( 100vh - 282px )", overflowY: "auto" }}>
-        {messages.map((message: any, index: any) => (
-          <div className="chat-message" key={index} ref={scrollRef}>
+        {publicChatMessages.map((message: any, index: any) => (
+          <div className="chat-message" key={`mes${index}`} ref={scrollRef}>
             <div className="chat-user-data">
               <img
                 src={
-                  message.sender && message.sender?.profile_image
-                    ? message.sender?.profile_image
+                  message.sender && message.sender.profile_picture
+                    ? message.sender.profile_picture
                     : GuestIcon
                 }
                 alt="Guest"
               />
               <p style={{ textTransform: "capitalize" }}>
-                {message.sender != null && message.sender.name}
+                {message.sender.name}
               </p>
             </div>
             <div className="bubble">
               <div className="bubble-inner">
                 <p style={{ textAlign: "right" }}>
-                  {message.sender != null && message.sender.race
-                    ? message.sender.race
-                    : "human"}
+                  {message.sender.race ? message.sender.race : "human"}
                 </p>
                 <div>
                   <p>{message.message}</p>
