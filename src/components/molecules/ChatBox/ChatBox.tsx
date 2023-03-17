@@ -8,6 +8,7 @@ import { config } from "../../../config/config";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import ClearIcon from "@mui/icons-material/Clear";
+
 import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
@@ -44,7 +45,7 @@ export default function ChatBox({ type }: any) {
   };
   const uploadImage = async (body: any) => {
     const data = await axios.post(
-      "http://localhost:3001/api/v1/guest/uploadPublicChatMedia",
+      `${config.API_URL}/guest/uploadPublicChatMedia`,
       body,
       options
     );
@@ -64,7 +65,7 @@ export default function ChatBox({ type }: any) {
     if (user !== "null") {
       console.log(JSON.parse(user), "userr");
       userDetail = JSON.parse(user);
-      userDetail.message_type=type
+      userDetail.message_type = type;
     }
 
     console.log(deviceInfo, "info");
