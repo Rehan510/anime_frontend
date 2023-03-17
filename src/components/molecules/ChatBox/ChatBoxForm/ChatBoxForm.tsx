@@ -2,10 +2,10 @@ import { Field, reduxForm, reset } from "redux-form";
 import { useDispatch } from "react-redux";
 function ChatBoxForm(props: any) {
   const dispatch = useDispatch();
-  const { handleSubmit, pristine, reset, submitting, } = props;
-  const handleSubmitForm = (event:any) => {
+  const { handleSubmit, pristine, reset, submitting } = props;
+  const handleSubmitForm = (event: any,type="message") => {
     event.preventDefault();
-    handleSubmit(event)
+    handleSubmit(event,type);
     reset();
     // dispatch(reset("ChatBoxForm"));
   };

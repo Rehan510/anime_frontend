@@ -84,7 +84,7 @@ export default function Pictures() {
                           <div className="items-box">
                             <PhotoGallery
                               group="picture_private"
-                              image={`${process.env.REACT_APP_FILE_URL}/${picture.url}`}
+                              image={picture.url}
                             ></PhotoGallery>
                           </div>
                           <p className="content-icons">
@@ -138,7 +138,7 @@ export default function Pictures() {
                       <div className="items-box">
                         <PhotoGallery
                           group="picture_private"
-                          image={`${process.env.REACT_APP_FILE_URL}/${picture.url}`}
+                          image={picture.url}
                         ></PhotoGallery>
                       </div>
                       <p className="content-icons">

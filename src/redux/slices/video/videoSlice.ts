@@ -17,12 +17,12 @@ export const videoSlice = createSlice({
       state.videos = [...action.payload, ...state.videos];
       state.type === "private"
         ? state.privates.unshift({
-            url: `${process.env.REACT_APP_FILE_URL}/${action.payload.url}`,
+            url: action.payload.url,
             type: "video",
             title: action.payload.name,
           })
         : state.publics.unshift({
-            url: `${process.env.REACT_APP_FILE_URL}/${action.payload.url}`,
+            url: action.payload.url,
             type: "video",
             title: action.payload.name,
           });
@@ -43,7 +43,7 @@ export const videoSlice = createSlice({
       state.videos = action.payload;
       action.payload.forEach((img: any) => {
         let data = {
-          url: `${process.env.REACT_APP_FILE_URL}/${img.url}`,
+          url: img.url,
           type: "video",
           title: img.name,
         };

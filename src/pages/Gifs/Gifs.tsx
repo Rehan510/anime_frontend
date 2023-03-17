@@ -82,7 +82,7 @@ export default function Gifs() {
                           <div className="items-box">
                             <PhotoGallery
                               group="gif_private"
-                              image={`${process.env.REACT_APP_FILE_URL}/${gif.url}`}></PhotoGallery>
+                              image={gif.url}></PhotoGallery>
                           </div>
                           <p className="content-icons">
                             {location.pathname.includes("profile") ? (
@@ -126,7 +126,7 @@ export default function Gifs() {
                       <div className="items-box">
                         <PhotoGallery
                           group="gif_public"
-                          image={`${process.env.REACT_APP_FILE_URL}/${gif.url}`}></PhotoGallery>
+                          image={gif.url}></PhotoGallery>
                       </div>
                       <p className="content-icons">
                         <img

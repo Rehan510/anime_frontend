@@ -104,14 +104,8 @@ export default function Videos() {
                                 dispatch(backgroundActions.setAnime(false))
                               }
                             >
-                              <source
-                                src={`${process.env.REACT_APP_FILE_URL}/${video.url}`}
-                                type="video/mp4"
-                              />
-                              <source
-                                src={`${process.env.REACT_APP_FILE_URL}/${video.url}`}
-                                type="video/ogg"
-                              />
+                              <source src={video.url} type="video/mp4" />
+                              <source src={video.url} type="video/ogg" />
                             </video>
                           </div>
                           <p className="content-icons">
@@ -171,11 +165,11 @@ export default function Videos() {
                           }
                         >
                           <source
-                            src={`${process.env.REACT_APP_FILE_URL}/${video.url}`}
+                            src={video.url}
                             type="video/mp4"
                           />
                           <source
-                            src={`${process.env.REACT_APP_FILE_URL}/${video.url}`}
+                            src={video.url}
                             type="video/ogg"
                           />
                         </video>

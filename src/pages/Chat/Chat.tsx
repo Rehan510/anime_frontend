@@ -1,10 +1,12 @@
 import GuestIcon from "assets/Tiger.png";
+import PhotoGallery from "components/templates/PhotoGallery";
 import moment from "moment";
 import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import MessageService from "services/message.service";
 import SocketService from "services/socket.service";
-
+import ReactImageVideoLightbox from "react-image-video-lightbox";
+import ReactPlayer from "react-player";
 export default function Chat() {
   const dispatch = useAppDispatch();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -23,6 +25,25 @@ export default function Chat() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [publicChatMessages]);
   console.log(publicChatMessages, "mes");
+  const boxData = (type: any, message: any) => {
+    let data = <p>{message}</p>;
+
+    if (type === "image") {
+      data = <PhotoGallery group="user" image={message}></PhotoGallery>;
+    }
+    if (type === "video") {
+      data = (
+        <ReactPlayer
+          height={"200px"}
+          width={"200px"}
+          url={message}
+          controls={true}
+          volume={50}
+        />
+      );
+    }
+    return data;
+  };
   return (
     <>
       {/* <h2 className="heading">Chat</h2> */}
@@ -47,9 +68,7 @@ export default function Chat() {
                 <p style={{ textAlign: "right" }}>
                   {message.sender.race ? message.sender.race : "human"}
                 </p>
-                <div>
-                  <p>{message.message}</p>
-                </div>
+                <div>{boxData(message.message_type, message.message)}</div>
                 <div className="race-chat">
                   <p>
                     {moment(message.createdAt).format("h:mm a")}&nbsp;&nbsp;

@@ -34,7 +34,7 @@ export default function Home() {
           },
           message: data.message,
           createdAt: data.createdAt,
-          type: "message",
+          message_type: data.user.message_type,
         };
         dispatch(messageActions.setPublicChatMessages(message));
       });
